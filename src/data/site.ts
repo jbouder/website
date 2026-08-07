@@ -48,19 +48,19 @@ export const work: WorkEntry[] = [
   },
   {
     index: '003',
-    name: 'agent-quest',
-    description:
-      'Claude Code agents in a gaming context — coding agents leveling up, spending gold, and completing quests.',
-    meta: 'TS · 2026',
-    href: 'https://github.com/jbouder/agent-quest',
-  },
-  {
-    index: '004',
     name: 'motion-lab',
     description:
       'A playground for motion and transition experiments. Where easing curves go to be judged.',
     meta: 'TS · 2026',
     href: 'https://github.com/jbouder/motion-lab',
+  },
+  {
+    index: '004',
+    name: 'agent-quest',
+    description:
+      'Claude Code agents in a gaming context — coding agents leveling up, spending gold, and completing quests.',
+    meta: 'TS · 2026',
+    href: 'https://github.com/jbouder/agent-quest',
   },
 ]
 
