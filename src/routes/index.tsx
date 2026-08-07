@@ -1,87 +1,284 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { about, resume, site, socials, stats, work } from '../data/site'
+import { useReveal } from '../hooks/use-terminal'
 
 export const Route = createFileRoute('/')({ component: App })
 
-function App() {
+function Cmd({ children }: { children: React.ReactNode }) {
   return (
-    <main className="page-wrap px-4 pb-8 pt-14">
-      <section className="island-shell rise-in relative overflow-hidden rounded-[2rem] px-6 py-10 sm:px-10 sm:py-14">
-        <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(79,184,178,0.32),transparent_66%)]" />
-        <div className="pointer-events-none absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(47,106,74,0.18),transparent_66%)]" />
-        <p className="island-kicker mb-3">TanStack Start Base Template</p>
-        <h1 className="display-title mb-5 max-w-3xl text-4xl leading-[1.02] font-bold tracking-tight text-[var(--sea-ink)] sm:text-6xl">
-          Start simple, ship quickly.
-        </h1>
-        <p className="mb-8 max-w-2xl text-base text-[var(--sea-ink-soft)] sm:text-lg">
-          This base starter intentionally keeps things light: two routes, clean
-          structure, and the essentials you need to build from scratch.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <a
-            href="/about"
-            className="rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-[var(--lagoon-deep)] no-underline transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)]"
-          >
-            About This Starter
-          </a>
-          <a
-            href="https://tanstack.com/router"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-[rgba(23,58,64,0.2)] bg-white/50 px-5 py-2.5 text-sm font-semibold text-[var(--sea-ink)] no-underline transition hover:-translate-y-0.5 hover:border-[rgba(23,58,64,0.35)]"
-          >
-            Router Guide
-          </a>
-        </div>
-      </section>
+    <h2 className="cmd">
+      <span className="prompt-char">$</span> {children}
+    </h2>
+  )
+}
 
-      <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          [
-            'Type-Safe Routing',
-            'Routes and links stay in sync across every page.',
-          ],
-          [
-            'Server Functions',
-            'Call server code from your UI without creating API boilerplate.',
-          ],
-          [
-            'Streaming by Default',
-            'Ship progressively rendered responses for faster experiences.',
-          ],
-          [
-            'Tailwind Native',
-            'Design quickly with utility-first styling and reusable tokens.',
-          ],
-        ].map(([title, desc], index) => (
-          <article
-            key={title}
-            className="island-shell feature-card rise-in rounded-2xl p-5"
-            style={{ animationDelay: `${index * 90 + 80}ms` }}
-          >
-            <h2 className="mb-2 text-base font-semibold text-[var(--sea-ink)]">
-              {title}
-            </h2>
-            <p className="m-0 text-sm text-[var(--sea-ink-soft)]">{desc}</p>
-          </article>
-        ))}
-      </section>
+function App() {
+  useReveal()
 
-      <section className="island-shell mt-8 rounded-2xl p-6">
-        <p className="island-kicker mb-2">Quick Start</p>
-        <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[var(--sea-ink-soft)]">
-          <li>
-            Edit <code>src/routes/index.tsx</code> to customize the home page.
-          </li>
-          <li>
-            Update <code>src/components/Header.tsx</code> and{' '}
-            <code>src/components/Footer.tsx</code> for brand links.
-          </li>
-          <li>
-            Add routes in <code>src/routes</code> and tweak visual tokens in{' '}
-            <code>src/styles.css</code>.
-          </li>
-        </ul>
-      </section>
+  return (
+    <main className="relative z-[5] mx-auto max-w-[1180px] px-8">
+      <Hero />
+      <Work />
+      <About />
+      <Resume />
+      <Contact />
     </main>
+  )
+}
+
+function Hero() {
+  return (
+    <section
+      className="pt-[120px] pb-24"
+      style={{ borderBottom: '1px solid var(--line)' }}
+    >
+      <div className="mb-7 text-[13px]" style={{ color: 'var(--ink-dim)' }}>
+        <span style={{ color: 'var(--acc)' }}>$</span> whoami --verbose
+      </div>
+      <h1
+        className="m-0 font-bold"
+        style={{
+          fontSize: 'clamp(44px, 8.5vw, 116px)',
+          lineHeight: 0.95,
+          letterSpacing: '-.045em',
+          color: 'var(--ink-bright)',
+        }}
+      >
+        <span
+          className="typed"
+          style={{ '--typed-ch': site.name.length } as React.CSSProperties}
+        >
+          {site.name}
+        </span>
+        <span className="cursor" aria-hidden="true" />
+      </h1>
+      <p
+        className="mt-9 mb-0 max-w-[640px] text-[17px] leading-[1.75]"
+        style={{ color: 'var(--ink-soft)', textWrap: 'pretty' }}
+      >
+        {site.tagline}
+      </p>
+      <div className="mt-10 flex flex-wrap gap-3">
+        <a href="#work" className="btn btn-acc">
+          ./selected-work
+        </a>
+        <a href="#contact" className="btn">
+          ./say-hello
+        </a>
+      </div>
+      <div
+        className="mt-[72px] grid gap-px"
+        style={{
+          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+          background: 'var(--line)',
+          border: '1px solid var(--line)',
+        }}
+      >
+        {stats.map((s) => (
+          <div
+            key={s.label}
+            className="px-5 py-[18px]"
+            style={{ background: 'var(--bg)' }}
+          >
+            <div
+              className="text-[11px] tracking-[.12em]"
+              style={{ color: 'var(--ink-dim)' }}
+            >
+              {s.label}
+            </div>
+            <div className="mt-2 text-[22px]" style={{ color: 'var(--ink-bright)' }}>
+              {s.value}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function Work() {
+  return (
+    <section
+      id="work"
+      className="py-24"
+      style={{ borderBottom: '1px solid var(--line)' }}
+    >
+      <div data-reveal className="mb-11 flex items-baseline justify-between">
+        <Cmd>ls -la ./selected-work</Cmd>
+        <span className="text-xs" style={{ color: 'var(--ink-faint)' }}>
+          {work.length} entries
+        </span>
+      </div>
+
+      <div className="flex flex-col" style={{ borderTop: '1px solid var(--line)' }}>
+        {work.map((entry) => (
+          <a
+            key={entry.index}
+            href={entry.href}
+            target="_blank"
+            rel="noreferrer"
+            data-reveal
+            className="work-row"
+          >
+            <span className="text-xs" style={{ color: 'var(--ink-faint)' }}>
+              {entry.index}
+            </span>
+            <span
+              className="text-[21px]"
+              style={{ letterSpacing: '-.02em', color: 'var(--ink-bright)' }}
+            >
+              {entry.name}
+            </span>
+            <span
+              className="work-desc text-sm leading-[1.6]"
+              style={{ color: 'var(--ink-mid)' }}
+            >
+              {entry.description}
+            </span>
+            <span className="work-meta text-xs" style={{ color: 'var(--ink-dim)' }}>
+              {entry.meta}
+            </span>
+            <span className="work-arrow" style={{ color: 'var(--acc)' }}>
+              →
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function About() {
+  return (
+    <section
+      id="about"
+      className="py-24"
+      style={{ borderBottom: '1px solid var(--line)' }}
+    >
+      <div className="grid items-start gap-[72px] lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+        <div data-reveal>
+          <div className="mb-9">
+            <Cmd>cat about.md</Cmd>
+          </div>
+          {about.paragraphs.map((p, i) => (
+            <p
+              key={i}
+              className="mb-[22px] text-[17px] leading-[1.8] last:mb-0"
+              style={{ color: 'var(--ink-body)', textWrap: 'pretty' }}
+            >
+              {p}
+            </p>
+          ))}
+        </div>
+        <div
+          data-reveal
+          style={{
+            border: '1px solid var(--line)',
+            background: 'rgba(255,255,255,.012)',
+          }}
+        >
+          <div
+            className="px-[18px] py-3 text-[11px] tracking-[.14em]"
+            style={{ borderBottom: '1px solid var(--line)', color: 'var(--ink-dim)' }}
+          >
+            CURRENTLY
+          </div>
+          <div className="flex flex-col">
+            {about.currently.map((row, i) => (
+              <div
+                key={row.label}
+                className="flex justify-between gap-4 px-[18px] py-3.5 text-[13px]"
+                style={
+                  i < about.currently.length - 1
+                    ? { borderBottom: '1px solid var(--line-soft)' }
+                    : undefined
+                }
+              >
+                <span style={{ color: 'var(--ink-dim)' }}>{row.label}</span>
+                <span
+                  className="text-right"
+                  style={{
+                    color:
+                      i === about.currently.length - 1
+                        ? 'var(--acc)'
+                        : 'var(--ink)',
+                  }}
+                >
+                  {row.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Resume() {
+  return (
+    <section
+      id="resume"
+      className="py-24"
+      style={{ borderBottom: '1px solid var(--line)' }}
+    >
+      <div data-reveal className="mb-11 flex items-baseline justify-between gap-6">
+        <Cmd>history | head -20</Cmd>
+      </div>
+      <div className="flex flex-col" style={{ borderTop: '1px solid var(--line)' }}>
+        {resume.map((entry) => (
+          <div
+            key={entry.period}
+            data-reveal
+            className="grid gap-8 py-6 sm:grid-cols-[130px_minmax(0,1fr)]"
+            style={{ borderBottom: '1px solid var(--line)' }}
+          >
+            <span className="text-[13px]" style={{ color: 'var(--ink-dim)' }}>
+              {entry.period}
+            </span>
+            <div>
+              <div className="text-lg" style={{ color: 'var(--ink-bright)' }}>
+                {entry.role} <span style={{ color: 'var(--ink-faint)' }}>·</span>{' '}
+                {entry.org}
+              </div>
+              <div
+                className="mt-2 max-w-[620px] text-sm leading-[1.65]"
+                style={{ color: 'var(--ink-mid)' }}
+              >
+                {entry.description}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function Contact() {
+  return (
+    <section id="contact" className="pt-[110px] pb-[130px]">
+      <div data-reveal>
+        <div className="mb-8">
+          <Cmd>mail -s &quot;hello&quot;</Cmd>
+        </div>
+        <a href={`mailto:${site.email}`} className="email-link">
+          {site.email}
+        </a>
+        <div className="mt-12 flex flex-wrap gap-2.5">
+          {socials.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-sm"
+            >
+              {s.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
