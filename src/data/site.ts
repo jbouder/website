@@ -15,7 +15,7 @@ export const site = {
 }
 
 export const stats = [
-  { label: 'UPTIME', value: '15+ yrs' },
+  { label: 'UPTIME', value: '18 yrs' },
   { label: 'STACK', value: 'React / TS' },
   { label: 'FOCUS', value: 'OSS & DX' },
   { label: 'LOCATION', value: 'Remote / US' },
@@ -95,25 +95,18 @@ export type ResumeEntry = {
 
 export const resume: ResumeEntry[] = [
   {
-    period: '2025 — now',
-    role: 'Engineer',
+    period: '2026 — now',
+    role: 'Director of Engineering — AI Experience',
     org: 'OpenTeams',
     description:
-      'Building open-source platforms and developer tooling — frontend architecture, design systems, and AI-assisted workflows.',
+      'Leading engineering for AI experience — open-source platforms, agentic workflows, and the frontends that make them usable.',
   },
   {
-    period: '2013 — 2025',
-    role: 'Chief Engineer',
+    period: '2008 — 2026',
+    role: 'Principal Software Engineer',
     org: 'MetroStar',
     description:
       'Led frontend engineering across government digital services. Created Comet, the open-source React component library and starter kit.',
-  },
-  {
-    period: 'before that',
-    role: 'Software Engineer',
-    org: 'various',
-    description:
-      'Full-stack roles across .NET and the early JavaScript wilderness. jQuery was involved. We do not speak of it.',
   },
 ]
 
