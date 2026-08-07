@@ -68,9 +68,15 @@ export default function Assistant() {
   const [status, setStatus] = useState('')
   const [error, setError] = useState('')
   const [isBusy, setIsBusy] = useState(false)
+  const [isPreparing, setIsPreparing] = useState(false)
   const [prompt, setPrompt] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
   const [streaming, setStreaming] = useState('')
+
+  // The composer is locked while the weights download and while a reply
+  // streams, so a question can never be submitted into a model that is not
+  // ready to answer it.
+  const isLocked = isBusy || isPreparing
 
   const loadEngine = async () => {
     if (engine.current) return engine.current
@@ -80,6 +86,7 @@ export default function Assistant() {
     if (reason) throw new Error(reason)
 
     setStatus('booting local model…')
+    setIsPreparing(true)
     engineLoad.current = (async () => {
       const created = await createEngine((text) => setStatus(text.toLowerCase()))
       engine.current = created
@@ -94,6 +101,8 @@ export default function Assistant() {
       // rejected promise for the rest of the session.
       engineLoad.current = null
       throw cause
+    } finally {
+      setIsPreparing(false)
     }
   }
 
@@ -124,7 +133,7 @@ export default function Assistant() {
 
   const ask = async (question: string) => {
     const input = question.trim()
-    if (!input || isBusy) return
+    if (!input || isLocked) return
 
     const history = [...messages, { role: 'user' as const, content: input }]
     setMessages(history)
@@ -173,8 +182,8 @@ export default function Assistant() {
   // The input is disabled while generating, which drops focus. Put it back so
   // the visitor can type a follow-up without reaching for the mouse.
   useEffect(() => {
-    if (isOpen && !isBusy) inputRef.current?.focus()
-  }, [isOpen, isBusy])
+    if (isOpen && !isLocked) inputRef.current?.focus()
+  }, [isOpen, isLocked])
 
   const isEmpty = messages.length === 0 && !streaming
 
@@ -197,7 +206,7 @@ export default function Assistant() {
                   setMessages([])
                   setError('')
                 }}
-                disabled={messages.length === 0 || isBusy}
+                disabled={messages.length === 0 || isLocked}
                 aria-label="Clear conversation"
               >
                 clear
@@ -222,8 +231,8 @@ export default function Assistant() {
                   you type leaves this tab.
                 </p>
                 <p style={{ color: 'var(--ink-faint)' }}>
-                  First question downloads the weights (a few hundred MB, cached
-                  after that).
+                  Opening this downloads the weights once (about 1 GB, cached by
+                  your browser after that).
                 </p>
                 <div className="assistant-chips">
                   {SUGGESTIONS.map((s) => (
@@ -232,6 +241,7 @@ export default function Assistant() {
                       type="button"
                       className="assistant-chip"
                       onClick={() => void ask(s)}
+                      disabled={isLocked}
                     >
                       {s}
                     </button>
@@ -261,11 +271,9 @@ export default function Assistant() {
               </div>
             )}
 
-            {isBusy && !streaming && (
+            {isLocked && !streaming && (
               <p className="assistant-status">{status || 'thinking…'}</p>
             )}
-
-            {!isBusy && status && <p className="assistant-status">{status}</p>}
 
             {error && (
               <p className="assistant-error" role="alert">
@@ -287,14 +295,16 @@ export default function Assistant() {
               className="assistant-input"
               value={prompt}
               onChange={(event) => setPrompt(event.target.value)}
-              placeholder="ask about johnny…"
+              placeholder={
+                isPreparing ? 'loading model…' : 'ask about johnny…'
+              }
               aria-label="Ask about Johnny"
-              disabled={isBusy}
+              disabled={isLocked}
             />
             <button
               type="submit"
               className="assistant-send"
-              disabled={isBusy || !prompt.trim()}
+              disabled={isLocked || !prompt.trim()}
             >
               ↵
             </button>

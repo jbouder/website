@@ -393,9 +393,14 @@ a:hover {
   text-align: left;
 }
 
-.assistant-chip:hover {
+.assistant-chip:hover:not(:disabled) {
   color: var(--acc);
   border-color: var(--acc);
+}
+
+.assistant-chip:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 
 .assistant-user {
