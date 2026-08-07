@@ -1,4 +1,4 @@
-# website
+# Personal Website
 
 Personal website for [Johnny Bouder](https://github.com/jbouder) — a terminal-themed portfolio built with [TanStack Start](https://tanstack.com/start), React 19, and TypeScript, deployed to Cloudflare Workers.
 
