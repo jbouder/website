@@ -5,13 +5,13 @@
 
 export const site = {
   name: 'johnny bouder',
-  title: 'Johnny Bouder — Frontend Engineer',
+  title: 'Johnny Bouder — AI Experience Engineer',
   description:
-    'Johnny Bouder is a frontend engineer focused on open source, developer experience, and the web platform.',
+    'Johnny Bouder is a frontend-focused AI experience engineer and director focused on open source, developer experience, and web applications.',
   email: 'jbouder@openteams.com',
   prompt: '~/jbouder', // shown in the header title bar
   tagline:
-    'Engineer, Leader, Advocate…on a relentless quest for knowledge. I build AI-enabled experiences, open-source tools, and the developer experience around them — lately that means AI agents, lots of experimentation, and design systems that people actually enjoy using.',
+    'Engineer, leader, advocate…on a relentless quest for knowledge. I build AI-enabled experiences, open-source tools, and the developer experience around them — lately that means AI agents, lots of experimentation, and design systems that people actually enjoy using.',
 }
 
 export const stats = [
