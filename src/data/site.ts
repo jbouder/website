@@ -16,8 +16,8 @@ export const site = {
 
 export const stats = [
   { label: 'UPTIME', value: '18 yrs' },
-  { label: 'STACK', value: 'React / TS' },
-  { label: 'FOCUS', value: 'OSS & DX' },
+  { label: 'STACK', value: 'React / TS / Python' },
+  { label: 'FOCUS', value: 'UI, UX, & DX' },
   { label: 'LOCATION', value: 'Remote / US' },
 ]
 
@@ -32,11 +32,11 @@ export type WorkEntry = {
 export const work: WorkEntry[] = [
   {
     index: '001',
-    name: 'agent-quest',
+    name: 'acolyte',
     description:
-      'Claude Code agents in a gaming context — coding agents leveling up, spending gold, and completing quests.',
-    meta: 'TS · 2026',
-    href: 'https://github.com/jbouder/agent-quest',
+      'An app to help web developers with their daily tasks — the sidekick every dev deserves.',
+    meta: 'TS · 2024',
+    href: 'https://github.com/jbouder/acolyte',
   },
   {
     index: '002',
@@ -48,6 +48,14 @@ export const work: WorkEntry[] = [
   },
   {
     index: '003',
+    name: 'agent-quest',
+    description:
+      'Claude Code agents in a gaming context — coding agents leveling up, spending gold, and completing quests.',
+    meta: 'TS · 2026',
+    href: 'https://github.com/jbouder/agent-quest',
+  },
+  {
+    index: '004',
     name: 'webgpu-playground',
     description:
       'Experimental WebGPU exploration tool — shaders, compute, and things browsers were not supposed to do.',
@@ -55,20 +63,12 @@ export const work: WorkEntry[] = [
     href: 'https://github.com/jbouder/webgpu-playground',
   },
   {
-    index: '004',
+    index: '005',
     name: 'motion-lab',
     description:
       'A playground for motion and transition experiments. Where easing curves go to be judged.',
     meta: 'TS · 2025',
     href: 'https://github.com/jbouder/motion-lab',
-  },
-  {
-    index: '005',
-    name: 'acolyte',
-    description:
-      'An app to help web developers with their daily tasks — the sidekick every dev deserves.',
-    meta: 'TS · 2024',
-    href: 'https://github.com/jbouder/acolyte',
   },
 ]
 
