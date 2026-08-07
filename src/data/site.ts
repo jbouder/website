@@ -56,27 +56,11 @@ export const work: WorkEntry[] = [
   },
   {
     index: '004',
-    name: 'webgpu-playground',
-    description:
-      'Experimental WebGPU exploration tool — shaders, compute, and things browsers were not supposed to do.',
-    meta: 'TS · 2026',
-    href: 'https://github.com/jbouder/webgpu-playground',
-  },
-  {
-    index: '005',
     name: 'motion-lab',
     description:
       'A playground for motion and transition experiments. Where easing curves go to be judged.',
     meta: 'TS · 2026',
     href: 'https://github.com/jbouder/motion-lab',
-  },
-  {
-    index: '006',
-    name: 'skills',
-    description:
-      'A collection of coding agent skills — scaffolding projects, applying team conventions, reviewing code, and running dev environments.',
-    meta: 'MD · 2026',
-    href: 'https://github.com/jbouder/skills',
   },
 ]
 
