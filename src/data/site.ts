@@ -17,7 +17,7 @@ export const site = {
 export const stats = [
   { label: 'UPTIME', value: '18 yrs' },
   { label: 'STACK', value: 'React / TS / Python' },
-  { label: 'FOCUS', value: 'UI, UX, & DX' },
+  { label: 'FOCUS', value: 'UI / UX / DX' },
   { label: 'LOCATION', value: 'Remote / US' },
 ]
 
