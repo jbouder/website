@@ -1,6 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
+import Assistant from '../components/Assistant'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { site } from '../data/site'
@@ -42,6 +43,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <Header />
           {children}
           <Footer />
+          <Assistant />
         </div>
         {import.meta.env.DEV && (
           <TanStackDevtools

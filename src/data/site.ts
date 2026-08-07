@@ -100,6 +100,13 @@ export const resume: ResumeEntry[] = [
     description:
       'Led frontend engineering across government digital services. Created Comet, the open-source React component library and starter kit.',
   },
+  {
+    period: '2003 — 2007',
+    role: 'Sergeant — Combat Engineer',
+    org: 'United States Marine Corps',
+    description:
+      'Served as a combat engineer, reaching the rank of Sergeant before moving into software.',
+  },
 ]
 
 export const socials = [
@@ -107,3 +114,81 @@ export const socials = [
   { label: 'linkedin', href: 'https://www.linkedin.com/in/johnny-bouder/' },
   { label: 'openteams', href: 'https://www.openteams.com' },
 ]
+
+/**
+ * Extra biographical detail that does not appear anywhere on the page but is
+ * fair game for the assistant to answer from. Everything here is public.
+ * The assistant is instructed to answer only from this file — see
+ * `src/lib/assistant.ts`.
+ */
+export const bio = {
+  /** Drives how the assistant refers to Johnny. Change here and it changes everywhere. */
+  pronouns: 'he/him',
+  summary:
+    'Johnny Bouder is a frontend-focused engineer and engineering leader with roughly 18 years of experience building for the web. He currently leads AI experience engineering at OpenTeams, and before that spent his career at MetroStar building government digital services and open-source design systems.',
+
+  education:
+    'Studied computer science at George Mason University (GMU) in Virginia.',
+
+  military:
+    'Served in the United States Marine Corps (USMC) from 2003 to 2007 as a combat engineer, reaching the rank of Sergeant, before starting his software career.',
+
+  skills: [
+    {
+      label: 'languages',
+      value: 'TypeScript, JavaScript, Python, C#, HTML, CSS',
+    },
+    {
+      label: 'frontend',
+      value: 'React, TanStack (Start / Router / Query), Tailwind CSS, Storybook',
+    },
+    {
+      label: 'ai',
+      value:
+        'Coding agents, agentic workflows, MCP, local in-browser inference (WebLLM / WebGPU)',
+    },
+    {
+      label: 'platform',
+      value: 'Cloudflare Workers, Docker, AWS, Azure, PostgreSQL',
+    },
+    {
+      label: 'practice',
+      value:
+        'Design systems, developer experience, accessibility, open-source maintenance, technical leadership',
+    },
+  ],
+
+  highlights: [
+    'Created Comet at MetroStar: an open-source React + TypeScript component library built on the U.S. Web Design System (USWDS) 3.0, with 40+ components split across packages (comet-uswds, comet-data-viz, comet-extras) plus a comet-starter app. It was built to accelerate delivery of federal digital services.',
+    'Now Director of Engineering for AI Experience at OpenTeams, leading open-source AI platforms, agentic workflows, and the frontends that make them usable.',
+    'Writes about working alongside AI coding tools without losing craft — the argument being that speed is a gift and spending some of it on quality is how you stay in control.',
+    'Builds a steady stream of public experiments: acolyte (a web developer sidekick app), holotable (generative BI dashboards), motion-lab (motion and easing experiments), agent-quest (coding agents in a game), webgpu-playground, and a collection of coding-agent skills.',
+  ],
+
+  writing: [
+    {
+      title: 'Slow Down — Simple Lessons for Guiding AI and Shipping Better Code',
+      href: 'https://openteams.com/slow-down-ship-better-code/',
+      summary:
+        'Argues for deliberate restraint with AI coding tools: have the agent draft a plan first and review it, split big changes into separate PRs, be specific about requirements and edge cases, do the small edits yourself so your skills stay sharp, and let a different agent review the PR for an unbiased read.',
+    },
+  ],
+
+  family: 'Johnny is a husband and a father. He has two dogs.',
+
+  // Noun phrases, so the assistant can drop them straight into a sentence.
+  interests: [
+    'Star Wars',
+    'anime',
+    'Magic: The Gathering (MTG)',
+    'playing guitar',
+    'heavy metal',
+    'science fiction',
+    'the outdoors and traveling',
+    'making cheese at home',
+    'Reese’s Peanut Butter Cups, which he accepts as payment',
+  ],
+
+  availability:
+    'Open to interesting problems. The best way to reach him is email at jbouder@openteams.com; he is also on GitHub as @jbouder and on LinkedIn.',
+}
