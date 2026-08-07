@@ -11,7 +11,7 @@ export const site = {
   email: 'jbouder@openteams.com',
   prompt: '~/jbouder', // shown in the header title bar
   tagline:
-    'Frontend engineer on a relentless quest for knowledge. I build AI-enabled experiences, open-source tools, and the developer experience around them — lately that means AI agents, lots of experimentation, and design systems that people actually enjoy using.',
+    'Engineer, Leader, Advocate…on a relentless quest for knowledge. I build AI-enabled experiences, open-source tools, and the developer experience around them — lately that means AI agents, lots of experimentation, and design systems that people actually enjoy using.',
 }
 
 export const stats = [
