@@ -133,6 +133,10 @@ export const bio = {
   military:
     'Served in the United States Marine Corps (USMC) from 2003 to 2007 as a combat engineer, reaching the rank of Sergeant, before starting his software career.',
 
+  /** The short answer to "what's your stack?" — one of the assistant's suggested questions. */
+  stack:
+    'React, TypeScript, shadcn/ui, Tailwind CSS, TanStack, Python, and FastAPI.',
+
   skills: [
     {
       label: 'languages',
@@ -140,7 +144,12 @@ export const bio = {
     },
     {
       label: 'frontend',
-      value: 'React, TanStack (Start / Router / Query), Tailwind CSS, Storybook',
+      value:
+        'React, TanStack (Start / Router / Query), Tailwind CSS, shadcn/ui, Storybook',
+    },
+    {
+      label: 'backend',
+      value: 'Python, FastAPI, PostgreSQL',
     },
     {
       label: 'ai',
@@ -149,7 +158,7 @@ export const bio = {
     },
     {
       label: 'platform',
-      value: 'Cloudflare Workers, Docker, AWS, Azure, PostgreSQL',
+      value: 'Cloudflare Workers, Docker, AWS, Azure',
     },
     {
       label: 'practice',

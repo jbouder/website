@@ -403,6 +403,15 @@ a:hover {
   cursor: default;
 }
 
+/* Warm-up line under the suggestions: size heads-up, then load progress. */
+.assistant-note {
+  margin-top: 4px;
+  color: var(--ink-faint);
+  font-size: 12px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
 .assistant-user {
   display: flex;
   gap: 8px;

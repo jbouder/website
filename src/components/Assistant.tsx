@@ -69,6 +69,7 @@ export default function Assistant() {
   const [error, setError] = useState('')
   const [isBusy, setIsBusy] = useState(false)
   const [isPreparing, setIsPreparing] = useState(false)
+  const [isReady, setIsReady] = useState(false)
   const [prompt, setPrompt] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
   const [streaming, setStreaming] = useState('')
@@ -91,6 +92,7 @@ export default function Assistant() {
       const created = await createEngine((text) => setStatus(text.toLowerCase()))
       engine.current = created
       setStatus('')
+      setIsReady(true)
       return created
     })()
 
@@ -230,10 +232,6 @@ export default function Assistant() {
                   reach him. The model runs entirely in your browser, so nothing
                   you type leaves this tab.
                 </p>
-                <p style={{ color: 'var(--ink-faint)' }}>
-                  Opening this downloads the weights once (about 1 GB, cached by
-                  your browser after that).
-                </p>
                 <div className="assistant-chips">
                   {SUGGESTIONS.map((s) => (
                     <button
@@ -247,6 +245,17 @@ export default function Assistant() {
                     </button>
                   ))}
                 </div>
+                {/*
+                  One line for the whole warm-up: the size heads-up first, then
+                  WebLLM's own progress text once it starts reporting. Both are
+                  gone for good the moment the model is ready.
+                */}
+                {!isReady && (
+                  <p className="assistant-note">
+                    {status ||
+                      'Downloading the model — about 1 GB, cached by your browser after this.'}
+                  </p>
+                )}
               </div>
             )}
 
@@ -271,7 +280,9 @@ export default function Assistant() {
               </div>
             )}
 
-            {isLocked && !streaming && (
+            {/* Warm-up progress lives in the intro note above; this covers
+                generating a reply. */}
+            {isBusy && !streaming && (
               <p className="assistant-status">{status || 'thinking…'}</p>
             )}
 
