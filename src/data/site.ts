@@ -70,6 +70,14 @@ export const work: WorkEntry[] = [
     meta: 'TS · 2025',
     href: 'https://github.com/jbouder/motion-lab',
   },
+  {
+    index: '006',
+    name: 'skills',
+    description:
+      'A collection of coding agent skills — scaffolding projects, applying team conventions, reviewing code, and running dev environments.',
+    meta: 'MD · 2026',
+    href: 'https://github.com/jbouder/skills',
+  },
 ]
 
 export const about = {
