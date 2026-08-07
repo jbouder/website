@@ -35,7 +35,7 @@ export const work: WorkEntry[] = [
     name: 'acolyte',
     description:
       'An app to help web developers with their daily tasks — the sidekick every dev deserves.',
-    meta: 'TS · 2024',
+    meta: 'TS · 2025',
     href: 'https://github.com/jbouder/acolyte',
   },
   {
@@ -43,7 +43,7 @@ export const work: WorkEntry[] = [
     name: 'holotable',
     description:
       'Generative business intelligence dashboard concept. Ask a question, get a dashboard.',
-    meta: 'TS · 2025',
+    meta: 'TS · 2026',
     href: 'https://github.com/jbouder/holotable',
   },
   {
@@ -59,7 +59,7 @@ export const work: WorkEntry[] = [
     name: 'webgpu-playground',
     description:
       'Experimental WebGPU exploration tool — shaders, compute, and things browsers were not supposed to do.',
-    meta: 'TS · 2025',
+    meta: 'TS · 2026',
     href: 'https://github.com/jbouder/webgpu-playground',
   },
   {
@@ -67,7 +67,7 @@ export const work: WorkEntry[] = [
     name: 'motion-lab',
     description:
       'A playground for motion and transition experiments. Where easing curves go to be judged.',
-    meta: 'TS · 2025',
+    meta: 'TS · 2026',
     href: 'https://github.com/jbouder/motion-lab',
   },
   {
