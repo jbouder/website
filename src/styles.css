@@ -6,7 +6,14 @@
     monospace;
 }
 
+/* ---------------------------------------------------------------------------
+   Themes. :root is the dark terminal (the default look); [data-theme='light']
+   is the paper terminal; [data-theme='party'] is dark with a hue-cycling
+   accent. A blocking script in <head> sets data-theme before first paint.
+   --------------------------------------------------------------------------- */
+
 :root {
+  color-scheme: dark;
   --acc: #7ef2b0;
   --acc2: #f2c17e;
   --bg: #0b0d0c;
@@ -22,6 +29,136 @@
   --line-soft: #171b19;
   --line-btn: #2a312d;
   --row-hover: #11150f;
+  --header-bg: rgba(11, 13, 12, 0.82);
+  --card-tint: rgba(255, 255, 255, 0.012);
+  --grid-line: rgba(215, 220, 216, 0.045);
+  --scan-tint: rgba(126, 242, 176, 0.05);
+  --glow-a: rgba(126, 242, 176, 0.07);
+  --glow-b: rgba(242, 193, 126, 0.045);
+  --panel-bg: rgba(10, 12, 11, 0.97);
+  --launcher-bg: rgba(11, 13, 12, 0.9);
+  --panel-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* Light: a paper terminal. All text tokens hold ≥4.5:1 against --bg.
+   KEEP IN SYNC with the no-JS fallback block below. */
+[data-theme='light'] {
+  color-scheme: light;
+  --acc: #0c7a45;
+  --acc2: #8f5a00;
+  --bg: #f2f5f2;
+  --bg-footer: #eceff2;
+  --ink: #29302b;
+  --ink-bright: #10140f;
+  --ink-soft: #414c44;
+  --ink-body: #333b35;
+  --ink-mid: #4d5850;
+  --ink-dim: #5a655c;
+  --ink-faint: #67726a;
+  --line: #d8ded8;
+  --line-soft: #e2e7e2;
+  --line-btn: #b4beb5;
+  --row-hover: #e7ede7;
+  --header-bg: rgba(242, 245, 242, 0.85);
+  --card-tint: rgba(0, 0, 0, 0.02);
+  --grid-line: rgba(16, 20, 15, 0.05);
+  --scan-tint: rgba(12, 122, 69, 0.05);
+  --glow-a: rgba(12, 122, 69, 0.07);
+  --glow-b: rgba(143, 90, 0, 0.05);
+  --panel-bg: rgba(248, 250, 248, 0.97);
+  --launcher-bg: rgba(242, 245, 242, 0.9);
+  --panel-shadow: 0 24px 60px rgba(20, 30, 24, 0.18);
+}
+
+/* No-JS fallback: with scripting off nothing sets data-theme, so honor the
+   OS preference here. Duplicates the [data-theme='light'] tokens above. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --acc: #0c7a45;
+    --acc2: #8f5a00;
+    --bg: #f2f5f2;
+    --bg-footer: #eceff2;
+    --ink: #29302b;
+    --ink-bright: #10140f;
+    --ink-soft: #414c44;
+    --ink-body: #333b35;
+    --ink-mid: #4d5850;
+    --ink-dim: #5a655c;
+    --ink-faint: #67726a;
+    --line: #d8ded8;
+    --line-soft: #e2e7e2;
+    --line-btn: #b4beb5;
+    --row-hover: #e7ede7;
+    --header-bg: rgba(242, 245, 242, 0.85);
+    --card-tint: rgba(0, 0, 0, 0.02);
+    --grid-line: rgba(16, 20, 15, 0.05);
+    --scan-tint: rgba(12, 122, 69, 0.05);
+    --glow-a: rgba(12, 122, 69, 0.07);
+    --glow-b: rgba(143, 90, 0, 0.05);
+    --panel-bg: rgba(248, 250, 248, 0.97);
+    --launcher-bg: rgba(242, 245, 242, 0.9);
+    --panel-shadow: 0 24px 60px rgba(20, 30, 24, 0.18);
+  }
+}
+
+/* Party: the dark terminal, but the phosphor cycles through the whole
+   spectrum. --party-hue is a registered property so the hue itself animates;
+   every token derived from it rides along. */
+@property --party-hue {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 152;
+}
+
+@keyframes party-hue {
+  from {
+    --party-hue: 152;
+  }
+  to {
+    --party-hue: 512;
+  }
+}
+
+[data-theme='party'] {
+  --party-hue: 152;
+  --acc: oklch(0.82 0.2 var(--party-hue));
+  --acc2: oklch(0.8 0.16 calc(var(--party-hue) + 105));
+  --row-hover: oklch(0.75 0.15 var(--party-hue) / 0.08);
+  --scan-tint: oklch(0.8 0.2 calc(var(--party-hue) + 60) / 0.07);
+  --glow-a: oklch(0.75 0.2 var(--party-hue) / 0.12);
+  --glow-b: oklch(0.75 0.2 calc(var(--party-hue) + 150) / 0.09);
+  animation: party-hue 9s linear infinite;
+}
+
+[data-theme='party'] .fx-grid {
+  animation-duration: 3s;
+}
+
+[data-theme='party'] .fx-scan {
+  animation-duration: 3.5s;
+}
+
+[data-theme='party'] .status-dot {
+  animation-duration: 0.9s;
+  box-shadow: 0 0 14px var(--acc);
+}
+
+[data-theme='party'] .cursor,
+[data-theme='party'] .assistant-caret {
+  box-shadow: 0 0 18px var(--acc);
+}
+
+[data-theme='party'] h1 {
+  text-shadow: 0 0 36px
+    color-mix(in oklch, oklch(0.82 0.2 var(--party-hue)) 40%, transparent);
+}
+
+.party-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
 }
 
 html {
@@ -127,10 +264,7 @@ a:hover {
   pointer-events: none;
   z-index: 1;
   opacity: 0.5;
-  background-image: linear-gradient(
-    rgba(215, 220, 216, 0.045) 1px,
-    transparent 1px
-  );
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px);
   background-size: 100% 40px;
   animation: drift 9s linear infinite;
 }
@@ -146,30 +280,19 @@ a:hover {
 .fx-scan {
   height: 140px;
   width: 100%;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(126, 242, 176, 0.05),
-    transparent
-  );
+  background: linear-gradient(180deg, transparent, var(--scan-tint), transparent);
   animation: scan 7s linear infinite;
 }
 
 .page-bg {
   position: relative;
   min-height: 100vh;
-  overflow-x: hidden;
+  /* clip, not hidden: hidden creates a scroll container and breaks the
+     sticky header; clip guards horizontal overflow without one. */
+  overflow-x: clip;
   background:
-    radial-gradient(
-      1200px 600px at 70% -10%,
-      rgba(126, 242, 176, 0.07),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 500px at 0% 40%,
-      rgba(242, 193, 126, 0.045),
-      transparent 60%
-    ),
+    radial-gradient(1200px 600px at 70% -10%, var(--glow-a), transparent 60%),
+    radial-gradient(900px 500px at 0% 40%, var(--glow-b), transparent 60%),
     var(--bg);
 }
 
@@ -286,7 +409,7 @@ a:hover {
 .assistant-launcher {
   padding: 10px 16px;
   border: 1px solid var(--line-btn);
-  background: rgba(11, 13, 12, 0.9);
+  background: var(--launcher-bg);
   backdrop-filter: blur(8px);
   color: var(--ink-soft);
   font-family: inherit;
@@ -319,9 +442,9 @@ a:hover {
   width: min(420px, calc(100vw - 48px));
   height: min(560px, calc(100vh - 140px));
   border: 1px solid var(--line-btn);
-  background: rgba(10, 12, 11, 0.97);
+  background: var(--panel-bg);
   backdrop-filter: blur(10px);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  box-shadow: var(--panel-shadow);
   animation: assistant-in 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
@@ -506,6 +629,50 @@ a:hover {
   color: var(--ink-faint);
 }
 
+/* ---------------------------------------------------------------------------
+   Theme toggle: a segmented group of icon radios in the header.
+   --------------------------------------------------------------------------- */
+
+.theme-group {
+  display: flex;
+  border: 1px solid var(--line-btn);
+}
+
+.theme-opt {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 26px;
+  border: none;
+  background: none;
+  color: var(--ink-dim);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 0.18s ease,
+    background 0.18s ease;
+}
+
+.theme-opt + .theme-opt {
+  border-left: 1px solid var(--line-soft);
+}
+
+.theme-opt:hover {
+  color: var(--ink-bright);
+}
+
+.theme-opt[aria-checked='true'] {
+  color: var(--acc);
+  background: var(--row-hover);
+}
+
+.theme-opt:focus-visible {
+  outline: 1px solid var(--acc);
+  outline-offset: -1px;
+}
+
 /* Scroll reveal (progressively enhanced from JS) */
 .reveal {
   opacity: 1;
@@ -548,5 +715,10 @@ a:hover {
   .reveal[data-hidden='true'] {
     opacity: 1;
     transform: none;
+  }
+  /* Party without motion: a static multicolor theme, no hue spin, no canvas
+     (the overlay component also checks this query and renders nothing). */
+  [data-theme='party'] {
+    animation: none;
   }
 }

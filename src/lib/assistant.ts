@@ -83,6 +83,9 @@ const knowledge = [
   `## Contact and availability`,
   bio.availability,
   list(socials.map((s) => `${s.label}: ${s.href}`)),
+  '',
+  `## This website`,
+  `The site you are on is Johnny's terminal-styled portfolio. It has four themes — light, dark, system, and party — switchable from the toggle in the header. Party mode cycles the colors through the rainbow and rains confetti glyphs down the page. Visitors can also toggle it right here in the chat by typing "party on" or "party off".`,
 ].join('\n')
 
 export const SYSTEM_PROMPT = `You are the assistant on Johnny Bouder's personal website. Visitors ask you about Johnny — his background, his work, his skills, and how to reach him. You run locally in the visitor's browser.
@@ -107,5 +110,27 @@ export const SUGGESTIONS = [
   'What does Johnny do?',
   'What has he built?',
   'What is his stack?',
-  'How do I reach him?',
+  'Turn on party mode 🎉',
 ]
+
+export type PartyIntent = 'on' | 'off' | 'toggle'
+
+/**
+ * Party mode is toggled like a shell built-in: matched deterministically here
+ * and handled without the model, so it is instant, reliable, and available
+ * even while the weights are still downloading. Descriptive questions
+ * ("what is party mode?") fall through to the model, which knows about it
+ * from the profile above.
+ */
+export function partyCommand(input: string): PartyIntent | null {
+  const text = input.toLowerCase()
+  if (!/\bparty\b/.test(text)) return null
+  if (/\b(off|disable|stop|exit|end|quit|kill|down)\b/.test(text)) return 'off'
+  if (/\btoggle\b/.test(text)) return 'toggle'
+  if (/\b(on|enable|start|activate|turn|engage|launch|begin|sudo)\b/.test(text)) {
+    return 'on'
+  }
+  // A bare "party" / "party mode" / "party time" reads as a command;
+  // anything longer without a verb is a question for the model.
+  return text.split(/\s+/).length <= 3 ? 'toggle' : null
+}

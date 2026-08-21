@@ -174,7 +174,7 @@ function About() {
           data-reveal
           style={{
             border: '1px solid var(--line)',
-            background: 'rgba(255,255,255,.012)',
+            background: 'var(--card-tint)',
           }}
         >
           <div

@@ -9,8 +9,12 @@ import {
   SUGGESTIONS,
   SYSTEM_PROMPT,
   formatModelName,
+  partyCommand,
 } from '../lib/assistant'
+import type { PartyIntent } from '../lib/assistant'
 import { createEngine } from '../lib/assistant-engine'
+import { useTheme } from '../lib/theme'
+import type { ThemeMode } from '../lib/theme'
 
 /** Turns kept in the prompt. Small models drift badly with long histories. */
 const MAX_HISTORY = 8
@@ -59,6 +63,9 @@ function useIsDesktop(): boolean {
 
 export default function Assistant() {
   const isDesktop = useIsDesktop()
+  const { mode, setMode } = useTheme()
+  // Where to return when the party ends; null if party came from the header.
+  const modeBeforeParty = useRef<ThemeMode | null>(null)
   const engine = useRef<MLCEngineInterface | null>(null)
   const engineLoad = useRef<Promise<MLCEngineInterface> | null>(null)
   const scroller = useRef<HTMLDivElement>(null)
@@ -133,9 +140,48 @@ export default function Assistant() {
     if (node) node.scrollTop = node.scrollHeight
   }, [messages, streaming, status])
 
+  /**
+   * Party toggling never touches the model: matched input flips the theme and
+   * answers with a canned line, so it works instantly — even while the
+   * weights are still downloading.
+   */
+  const runPartyCommand = (input: string, intent: PartyIntent) => {
+    const isParty = mode === 'party'
+    const next = intent === 'toggle' ? (isParty ? 'off' : 'on') : intent
+    let reply: string
+    if (next === 'on' && isParty) {
+      reply =
+        'The party is already in full swing — look around. Say "party off" to wind it down.'
+    } else if (next === 'off' && !isParty) {
+      reply = 'No party running right now. Say "party on" and I\'ll fix that.'
+    } else if (next === 'on') {
+      modeBeforeParty.current = mode
+      setMode('party')
+      reply =
+        '🎉 Party mode: ON. Confetti deployed, colors cycling. Say "party off" when you need to look employable again.'
+    } else {
+      setMode(modeBeforeParty.current ?? 'system')
+      modeBeforeParty.current = null
+      reply = 'Party mode: OFF. Back to serious terminal business.'
+    }
+    setMessages((current) => [
+      ...current,
+      { role: 'user', content: input },
+      { role: 'assistant', content: reply },
+    ])
+    setPrompt('')
+    setError('')
+  }
+
   const ask = async (question: string) => {
     const input = question.trim()
-    if (!input || isLocked) return
+    if (!input) return
+    const intent = partyCommand(input)
+    if (intent) {
+      runPartyCommand(input, intent)
+      return
+    }
+    if (isLocked) return
 
     const history = [...messages, { role: 'user' as const, content: input }]
     setMessages(history)
@@ -239,7 +285,9 @@ export default function Assistant() {
                       type="button"
                       className="assistant-chip"
                       onClick={() => void ask(s)}
-                      disabled={isLocked}
+                      // Party chips skip the model, so they stay usable
+                      // while the weights download.
+                      disabled={isLocked && !partyCommand(s)}
                     >
                       {s}
                     </button>

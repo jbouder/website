@@ -1,5 +1,6 @@
 import { site } from '../data/site'
 import { useClock } from '../hooks/use-terminal'
+import ThemeToggle from './ThemeToggle'
 
 const NAV = [
   { href: '#work', label: 'work' },
@@ -16,7 +17,7 @@ export default function Header() {
       className="sticky top-0 z-20 flex items-center justify-between gap-6 px-8 py-3.5 text-[13px] tracking-[.02em] backdrop-blur-md"
       style={{
         borderBottom: '1px solid var(--line)',
-        background: 'rgba(11,13,12,.82)',
+        background: 'var(--header-bg)',
       }}
     >
       <div className="flex items-center gap-2.5" style={{ color: 'var(--ink-mid)' }}>
@@ -31,12 +32,15 @@ export default function Header() {
           </a>
         ))}
       </nav>
-      <div
-        className="hidden min-w-[64px] text-right text-xs tabular-nums md:block"
-        style={{ color: 'var(--ink-dim)' }}
-        suppressHydrationWarning
-      >
-        {clock}
+      <div className="flex items-center gap-4">
+        <ThemeToggle />
+        <div
+          className="hidden min-w-[64px] text-right text-xs tabular-nums md:block"
+          style={{ color: 'var(--ink-dim)' }}
+          suppressHydrationWarning
+        >
+          {clock}
+        </div>
       </div>
     </header>
   )
