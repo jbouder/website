@@ -244,6 +244,11 @@ a:hover {
   white-space: nowrap;
   vertical-align: bottom;
   width: calc(var(--typed-ch) * 1ch);
+  /* The h1's tight line-height leaves descenders (j, y) outside the box,
+     and overflow:hidden clips them; pad downward and pull the margin back
+     so the layout doesn't shift. */
+  padding-bottom: 0.18em;
+  margin-bottom: -0.18em;
   animation: type 1.1s steps(var(--typed-ch), end) 0.3s backwards;
 }
 

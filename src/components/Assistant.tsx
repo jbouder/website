@@ -176,6 +176,12 @@ export default function Assistant() {
   const ask = async (question: string) => {
     const input = question.trim()
     if (!input) return
+    // Shell built-in: /exit (and friends) closes the panel, no model needed.
+    if (/^\/?(exit|quit|close)$/i.test(input)) {
+      setPrompt('')
+      setIsOpen(false)
+      return
+    }
     const intent = partyCommand(input)
     if (intent) {
       runPartyCommand(input, intent)
@@ -276,7 +282,7 @@ export default function Assistant() {
                 <p>
                   Ask me anything about Johnny — his work, his stack, how to
                   reach him. The model runs entirely in your browser, so nothing
-                  you type leaves this tab.
+                  you type leaves this tab. Type /exit to close.
                 </p>
                 <div className="assistant-chips">
                   {SUGGESTIONS.map((s) => (
