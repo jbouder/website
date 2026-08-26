@@ -109,6 +109,26 @@ export const resume: ResumeEntry[] = [
   },
 ]
 
+/**
+ * The "processes" shown by the htop widget in About and the `htop` command
+ * in the console. CPU numbers are base loads; both views jitter them.
+ */
+export type ProcessEntry = {
+  pid: number
+  cpu: number
+  mem: string
+  time: string
+  command: string
+}
+
+export const processes: ProcessEntry[] = [
+  { pid: 1993, cpu: 42, mem: '4.2', time: '312:44', command: 'agent-quest --build' },
+  { pid: 2077, cpu: 23, mem: '2.3', time: '128:07', command: 'nebari' },
+  { pid: 8080, cpu: 61, mem: '9.1', time: '45:12', command: 'webllm --local' },
+  { pid: 600, cpu: 88, mem: '0.8', time: '999:59', command: 'coffee.service' },
+  { pid: 42, cpu: 0, mem: '0.1', time: '0:00', command: 'party-mode.service' },
+]
+
 export const socials = [
   { label: 'github', href: 'https://github.com/jbouder' },
   { label: 'linkedin', href: 'https://www.linkedin.com/in/johnny-bouder/' },

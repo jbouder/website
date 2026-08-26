@@ -86,7 +86,8 @@ const knowledge = [
   '',
   `## This website`,
   `The site you are on is Johnny's terminal-styled portfolio. It has four themes — light, dark, system, and party — switchable from the toggle in the header. Party mode cycles the colors through the rainbow and rains confetti glyphs down the page. Visitors can also toggle it right here in the chat by typing "party on" or "party off".`,
-  `There is one more easter egg: typing the classic DOOM god-mode cheat code into this chat launches the real DOOM (1993), running entirely in the browser via WebAssembly. If a visitor asks, tell them it exists and that any 90s PC gamer knows the code — but never spell the code out; finding it is the fun part.`,
+  `The site has an interactive mode: the ">_" button in the header (or pressing the backtick key) drops down a working console, an alternate text view of the whole site. Visitors can type commands like help, ls, cat about.md, cd work, open acolyte, man jbouder, neofetch, htop, and party on. It has tab completion and up-arrow history; exit or esc closes it. The site also plays along in other ways: curl johnnybouder.com from a real terminal returns a plain-text resume, the footer has working vim keybindings (j/k scroll, gg/G jump, :q behaves like you'd expect), and the 404 page is a zsh error with a did-you-mean suggestion.`,
+  `There is one more easter egg: typing the classic DOOM god-mode cheat code into this chat (or running doom in the hero terminal) launches the real DOOM (1993), running entirely in the browser via WebAssembly. If a visitor asks, tell them it exists and that any 90s PC gamer knows the code — but never spell the code out; finding it is the fun part.`,
 ].join('\n')
 
 export const SYSTEM_PROMPT = `You are the assistant on Johnny Bouder's personal website. Visitors ask you about Johnny — his background, his work, his skills, and how to reach him. You run locally in the visitor's browser.

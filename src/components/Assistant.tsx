@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type {
   ChatCompletionMessageParam,
   MLCEngineInterface,
@@ -14,12 +14,9 @@ import {
 } from '../lib/assistant'
 import type { PartyIntent } from '../lib/assistant'
 import { createEngine } from '../lib/assistant-engine'
+import { useDoom } from '../lib/doom'
 import { useTheme } from '../lib/theme'
 import type { ThemeMode } from '../lib/theme'
-
-// Code-split so the overlay (and the ~6.5 MB wasm it fetches on mount) costs
-// nothing until someone actually types the cheat code.
-const DoomOverlay = lazy(() => import('./DoomOverlay'))
 
 /** Turns kept in the prompt. Small models drift badly with long histories. */
 const MAX_HISTORY = 8
@@ -69,6 +66,7 @@ function useIsDesktop(): boolean {
 export default function Assistant() {
   const isDesktop = useIsDesktop()
   const { mode, setMode } = useTheme()
+  const { isDoomOpen, openDoom } = useDoom()
   // Where to return when the party ends; null if party came from the header.
   const modeBeforeParty = useRef<ThemeMode | null>(null)
   const engine = useRef<MLCEngineInterface | null>(null)
@@ -85,7 +83,6 @@ export default function Assistant() {
   const [prompt, setPrompt] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
   const [streaming, setStreaming] = useState('')
-  const [isDoomOpen, setIsDoomOpen] = useState(false)
 
   // The composer is locked while the weights download and while a reply
   // streams, so a question can never be submitted into a model that is not
@@ -204,7 +201,7 @@ export default function Assistant() {
       ])
       setPrompt('')
       setError('')
-      setIsDoomOpen(true)
+      openDoom()
       return
     }
     const intent = partyCommand(input)
@@ -270,11 +267,6 @@ export default function Assistant() {
 
   return (
     <div className="assistant-dock">
-      {isDoomOpen && (
-        <Suspense fallback={null}>
-          <DoomOverlay onClose={() => setIsDoomOpen(false)} />
-        </Suspense>
-      )}
       {isOpen && (
         <section className="assistant-panel" aria-label="Ask about Johnny">
           <header className="assistant-head">

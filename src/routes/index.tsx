@@ -1,8 +1,30 @@
 import { createFileRoute } from '@tanstack/react-router'
+import Htop from '../components/Htop'
 import { about, resume, site, socials, stats, work } from '../data/site'
 import { useReveal } from '../hooks/use-terminal'
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/')({
+  server: {
+    handlers: {
+      // `curl johnnybouder.com` gets a plain-text resume, wttr.in-style.
+      // Anything that looks like a browser falls through to normal SSR.
+      GET: async ({ request, next }) => {
+        const agent = request.headers.get('user-agent') ?? ''
+        if (/\b(curl|wget|httpie|libcurl|lynx|w3m)\b/i.test(agent)) {
+          const { asciiResume } = await import('../lib/ascii-resume')
+          return new Response(asciiResume(), {
+            headers: {
+              'content-type': 'text/plain; charset=utf-8',
+              'cache-control': 'public, max-age=3600',
+            },
+          })
+        }
+        return next()
+      },
+    },
+  },
+  component: App,
+})
 
 function Cmd({ children }: { children: React.ReactNode }) {
   return (
@@ -170,46 +192,7 @@ function About() {
             </p>
           ))}
         </div>
-        <div
-          data-reveal
-          style={{
-            border: '1px solid var(--line)',
-            background: 'var(--card-tint)',
-          }}
-        >
-          <div
-            className="px-[18px] py-3 text-[11px] tracking-[.14em]"
-            style={{ borderBottom: '1px solid var(--line)', color: 'var(--ink-dim)' }}
-          >
-            CURRENTLY
-          </div>
-          <div className="flex flex-col">
-            {about.currently.map((row, i) => (
-              <div
-                key={row.label}
-                className="flex justify-between gap-4 px-[18px] py-3.5 text-[13px]"
-                style={
-                  i < about.currently.length - 1
-                    ? { borderBottom: '1px solid var(--line-soft)' }
-                    : undefined
-                }
-              >
-                <span style={{ color: 'var(--ink-dim)' }}>{row.label}</span>
-                <span
-                  className="text-right"
-                  style={{
-                    color:
-                      i === about.currently.length - 1
-                        ? 'var(--acc)'
-                        : 'var(--ink)',
-                  }}
-                >
-                  {row.value}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <Htop />
       </div>
     </section>
   )

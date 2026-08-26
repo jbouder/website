@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import PartyOverlay from '../components/PartyOverlay'
 import { site } from '../data/site'
+import { DoomProvider } from '../lib/doom'
 import { THEME_BOOTSTRAP, ThemeProvider } from '../lib/theme'
 
 import appCss from '../styles.css?url'
@@ -42,17 +43,19 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ThemeProvider>
-          <div className="page-bg">
-            <div className="fx-grid" aria-hidden="true" />
-            <div className="fx-scan-wrap" aria-hidden="true">
-              <div className="fx-scan" />
+          <DoomProvider>
+            <div className="page-bg">
+              <div className="fx-grid" aria-hidden="true" />
+              <div className="fx-scan-wrap" aria-hidden="true">
+                <div className="fx-scan" />
+              </div>
+              <PartyOverlay />
+              <Header />
+              {children}
+              <Footer />
+              <Assistant />
             </div>
-            <PartyOverlay />
-            <Header />
-            {children}
-            <Footer />
-            <Assistant />
-          </div>
+          </DoomProvider>
         </ThemeProvider>
         {import.meta.env.DEV && (
           <TanStackDevtools
