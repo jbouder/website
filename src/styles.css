@@ -635,6 +635,64 @@ a:hover {
 }
 
 /* ---------------------------------------------------------------------------
+   DOOM: fullscreen overlay opened by the chat's cheat-code easter egg.
+   Reuses the assistant's header chrome (.assistant-head, .assistant-icon).
+   --------------------------------------------------------------------------- */
+
+.doom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+.doom-frame {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line-btn);
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow);
+  animation: assistant-in 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.doom-screen {
+  position: relative;
+  background: #000;
+}
+
+/* 640x400 framebuffer, integer-ish upscaled with crisp pixels. */
+.doom-screen canvas {
+  display: block;
+  width: min(960px, calc(100vw - 96px), calc((100vh - 200px) * 1.6));
+  aspect-ratio: 8 / 5;
+  image-rendering: pixelated;
+}
+
+.doom-note {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  color: var(--acc);
+  text-shadow: 0 0 12px var(--acc);
+}
+
+.doom-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 14px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+/* ---------------------------------------------------------------------------
    Theme toggle: a segmented group of icon radios in the header.
    --------------------------------------------------------------------------- */
 

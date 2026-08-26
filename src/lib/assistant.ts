@@ -86,6 +86,7 @@ const knowledge = [
   '',
   `## This website`,
   `The site you are on is Johnny's terminal-styled portfolio. It has four themes — light, dark, system, and party — switchable from the toggle in the header. Party mode cycles the colors through the rainbow and rains confetti glyphs down the page. Visitors can also toggle it right here in the chat by typing "party on" or "party off".`,
+  `There is one more easter egg: typing the classic DOOM god-mode cheat code into this chat launches the real DOOM (1993), running entirely in the browser via WebAssembly. If a visitor asks, tell them it exists and that any 90s PC gamer knows the code — but never spell the code out; finding it is the fun part.`,
 ].join('\n')
 
 export const SYSTEM_PROMPT = `You are the assistant on Johnny Bouder's personal website. Visitors ask you about Johnny — his background, his work, his skills, and how to reach him. You run locally in the visitor's browser.
@@ -112,6 +113,16 @@ export const SUGGESTIONS = [
   'What is his stack?',
   'Turn on party mode 🎉',
 ]
+
+/**
+ * The classic god-mode cheat, handled like a shell built-in: typed into the
+ * chat it launches the real DOOM (1993) in an overlay, without the model
+ * ever seeing it. Whitespace-tolerant, but nothing fuzzier — a cheat code
+ * has to be typed, not guessed at.
+ */
+export function isDoomCommand(input: string): boolean {
+  return /^\s*iddqd\s*$/i.test(input)
+}
 
 export type PartyIntent = 'on' | 'off' | 'toggle'
 
