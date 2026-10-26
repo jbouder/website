@@ -52,7 +52,9 @@ bun run build      # production build
 bun run deploy     # build + wrangler deploy to Cloudflare
 ```
 
-First deploy will prompt `wrangler` to log in to your Cloudflare account. To attach a custom domain, add a route in `wrangler.jsonc` or via the Cloudflare dashboard (Workers → website → Domains & Routes).
+Every push to `main` deploys through `.github/workflows/deploy.yml`, using the repo secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. Without the token the deploy job is skipped. To redeploy without a commit, run the workflow by hand (`gh workflow run deploy.yml`).
+
+Deploying from a laptop also works; the first `bun run deploy` prompts `wrangler` to log in to your Cloudflare account. To attach a custom domain, add a route in `wrangler.jsonc` or via the Cloudflare dashboard (Workers → website → Domains & Routes).
 
 > **Note:** Cloudflare Pages is in maintenance mode; TanStack Start's official Cloudflare target is Workers with static assets, which this project uses.
 
