@@ -32,14 +32,6 @@ export type WorkEntry = {
 export const work: WorkEntry[] = [
   {
     index: '001',
-    name: 'acolyte',
-    description:
-      'An app to help web developers with their daily tasks — the sidekick every dev deserves.',
-    meta: 'TS · 2025',
-    href: 'https://github.com/jbouder/acolyte',
-  },
-  {
-    index: '002',
     name: 'holotable',
     description:
       'Generative business intelligence dashboard concept. Ask a question, get a dashboard.',
@@ -47,7 +39,7 @@ export const work: WorkEntry[] = [
     href: 'https://github.com/jbouder/holotable',
   },
   {
-    index: '003',
+    index: '002',
     name: 'holocron',
     description:
       'A retro board that doesn’t archive your retros. The lessons stick around long after the sprint ends.',
@@ -55,12 +47,20 @@ export const work: WorkEntry[] = [
     href: 'https://github.com/jbouder/holocron',
   },
   {
-    index: '004',
+    index: '003',
     name: 'datapad',
     description:
       'A personal project tracker for keeping every side project, idea, and half-finished experiment in one place.',
     meta: 'TS · 2026',
     href: 'https://github.com/jbouder/datapad',
+  },
+  {
+    index: '004',
+    name: 'acolyte',
+    description:
+      'An app to help web developers with their daily tasks — the sidekick every dev deserves.',
+    meta: 'TS · 2025',
+    href: 'https://github.com/jbouder/acolyte',
   },
   {
     index: '005',
