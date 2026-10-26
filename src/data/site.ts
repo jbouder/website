@@ -71,7 +71,7 @@ export const about = {
     'Off the clock: side projects that occasionally escape into production, and an ever-growing list of experiments in the lab.',
   ],
   currently: [
-    { label: 'building', value: 'agent-quest' },
+    { label: 'building', value: 'datapad' },
     { label: 'exploring', value: 'AI coding agents' },
     { label: 'stack', value: 'React, TS, TanStack' },
     { label: 'status', value: 'open to interesting problems' },
@@ -122,7 +122,7 @@ export type ProcessEntry = {
 }
 
 export const processes: ProcessEntry[] = [
-  { pid: 1993, cpu: 42, mem: '4.2', time: '312:44', command: 'agent-quest --build' },
+  { pid: 1993, cpu: 42, mem: '4.2', time: '312:44', command: 'datapad --build' },
   { pid: 2077, cpu: 23, mem: '2.3', time: '128:07', command: 'nebari' },
   { pid: 8080, cpu: 61, mem: '9.1', time: '45:12', command: 'webllm --local' },
   { pid: 600, cpu: 88, mem: '0.8', time: '999:59', command: 'coffee.service' },
@@ -191,7 +191,7 @@ export const bio = {
     'Created Comet at MetroStar: an open-source React + TypeScript component library built on the U.S. Web Design System (USWDS) 3.0, with 40+ components split across packages (comet-uswds, comet-data-viz, comet-extras) plus a comet-starter app. It was built to accelerate delivery of federal digital services.',
     'Now Director of Engineering for AI Experience at OpenTeams, leading open-source AI platforms, agentic workflows, and the frontends that make them usable.',
     'Writes about working alongside AI coding tools without losing craft — the argument being that speed is a gift and spending some of it on quality is how you stay in control.',
-    'Builds a steady stream of public experiments: acolyte (a web developer sidekick app), holotable (generative BI dashboards), motion-lab (motion and easing experiments), agent-quest (coding agents in a game), webgpu-playground, and a collection of coding-agent skills.',
+    'Builds a steady stream of public experiments: acolyte (a web developer sidekick app), holotable (generative BI dashboards), holocron (a retro board that keeps your retros), datapad (a personal project tracker), webgpu-playground, and a collection of coding-agent skills.',
   ],
 
   writing: [
