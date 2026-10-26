@@ -62,6 +62,14 @@ export const work: WorkEntry[] = [
     meta: 'TS · 2026',
     href: 'https://github.com/jbouder/datapad',
   },
+  {
+    index: '005',
+    name: 'pulse',
+    description:
+      'A daily checkup on all of the above — commits, stars, releases, and traffic, collected every morning into a repo that is its own database.',
+    meta: 'TS · 2026',
+    href: 'https://github.com/jbouder/pulse',
+  },
 ]
 
 export const about = {
@@ -191,7 +199,7 @@ export const bio = {
     'Created Comet at MetroStar: an open-source React + TypeScript component library built on the U.S. Web Design System (USWDS) 3.0, with 40+ components split across packages (comet-uswds, comet-data-viz, comet-extras) plus a comet-starter app. It was built to accelerate delivery of federal digital services.',
     'Now Director of Engineering for AI Experience at OpenTeams, leading open-source AI platforms, agentic workflows, and the frontends that make them usable.',
     'Writes about working alongside AI coding tools without losing craft — the argument being that speed is a gift and spending some of it on quality is how you stay in control.',
-    'Builds a steady stream of public experiments: acolyte (a web developer sidekick app), holotable (generative BI dashboards), holocron (a retro board that keeps your retros), datapad (a personal project tracker), webgpu-playground, and a collection of coding-agent skills.',
+    'Builds a steady stream of public experiments: acolyte (a web developer sidekick app), holotable (generative BI dashboards), holocron (a retro board that keeps your retros), datapad (a personal project tracker), pulse (a daily dashboard of health and activity across those projects), webgpu-playground, and a collection of coding-agent skills.',
   ],
 
   writing: [

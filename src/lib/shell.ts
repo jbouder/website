@@ -186,7 +186,7 @@ const MAN_PAGE = [
   '',
   'SEE ALSO',
   '       acolyte(1), holotable(1), holocron(1), datapad(1),',
-  '       doom(6), party(7)',
+  '       pulse(1), doom(6), party(7)',
   '',
   `johnnybouder.com                  ${new Date().getFullYear()}                          JBOUDER(1)`,
 ]
