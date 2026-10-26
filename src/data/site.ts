@@ -48,19 +48,19 @@ export const work: WorkEntry[] = [
   },
   {
     index: '003',
-    name: 'motion-lab',
+    name: 'holocron',
     description:
-      'A playground for motion and transition experiments. Where easing curves go to be judged.',
+      'A retro board that doesn’t archive your retros. The lessons stick around long after the sprint ends.',
     meta: 'TS · 2026',
-    href: 'https://github.com/jbouder/motion-lab',
+    href: 'https://github.com/jbouder/holocron',
   },
   {
     index: '004',
-    name: 'agent-quest',
+    name: 'datapad',
     description:
-      'Claude Code agents in a gaming context — coding agents leveling up, spending gold, and completing quests.',
+      'A personal project tracker for keeping every side project, idea, and half-finished experiment in one place.',
     meta: 'TS · 2026',
-    href: 'https://github.com/jbouder/agent-quest',
+    href: 'https://github.com/jbouder/datapad',
   },
 ]
 

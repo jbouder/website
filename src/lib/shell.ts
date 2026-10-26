@@ -185,7 +185,7 @@ const MAN_PAGE = [
   '       was not broken. Accepts payment in Reese’s Peanut Butter Cups.',
   '',
   'SEE ALSO',
-  '       acolyte(1), holotable(1), motion-lab(1), agent-quest(1),',
+  '       acolyte(1), holotable(1), holocron(1), datapad(1),',
   '       doom(6), party(7)',
   '',
   `johnnybouder.com                  ${new Date().getFullYear()}                          JBOUDER(1)`,
